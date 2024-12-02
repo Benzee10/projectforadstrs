@@ -1,96 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Group</title>
+    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/social-media-chamfered-corner/154/whatsapp-1024.png" type="image/x-icon"> <!-- Replace with your favicon URL -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgZMYU2mW296mbmCAcr36Nv12pqibsI8BI62fqIc7GfpScAxljpjBFwT4&s=10'); /* Add your background image URL here */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .flirt-name {
+            font-size: 32px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .call-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .call-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Join Our Whatsapp Group!</h1>
+        <img src="" alt="Profile Picture" class="profile-img" id="profileImg">
+        <div class="flirt-name" id="flirtName">Loading...</div>
+        <a href="https://whilsttypewriter.com/b55qv0vprr?key=ce746f659eb6e784954af7caf958cda9" class="call-btn" id="callBtn">Join Now</a>
+    </div>
+
+    <script>
+        // Array of flirt names
+        const flirtNames = [
+            'Sweetheart', 'Honeybunch', 'Hot Curvy Girls Hookup', 'Spicy Exotic Love Links', 'Wild Ebony Girls Dating', 'Sultry Beauties for Love', 'Steamy Chocolate Girl Matches', 'Curvy Queens Hookups', 'Sizzling Black Beauties Connect', 'Hot Chocolate Babes', 'Seductive Melanin Match', 'Sensual Ebony Encounters', 'Sultry Girls Love Affair', 'Hot Chocolate Love Line', 'Spicy Ebony Girl Connections', 'Tempting Black Queens Dating', 'Lusty Curvy Girls Connect', 'Wild Brown Skin Love', 'Sizzling Hot Babe Hookup', 'Steamy Curves Love Match', 'Bold & Beautiful Girl Hookups', 'Curvy Queens in Love', 'Hot Chocolate Girls Only', 'Exotic Love, Black Beauties', 'Hot Melanin Love Vibes', 'Curvy Babes On Fire', 'Wild Love for Dark Beauties', 'Tempting Black Girl Love', 'Hot Curves, Wild Matches', 'Ebony Queens Hot Romance', 'Spicy Beauties Seeking Love', 'Steamy Black Girl Crush', 'Sultry Chocolate Babe Love', 'Curvy Queens for Hot Love', 'Hot Chocolate Love Sparks', 'Lusty Black Queens Hookup', 'Steamy Love for Curvy Babes', 'Wild Love for Dark Queens', 'Sultry Queens in Love', 'Spicy Chocolate Crush', 'Sizzling Curves Hookup', 'Curvy Babes in Love', 'Exotic Beauty Hookup Zone', 'Hot Queens in Love', 'Steamy Melanin Girl Vibes', 'Wild Beauties Hookup Now', 'Curvy Girl Love Links', 'Hot Babes, Spicy Matches', 'Sizzling Curvy Queens', 'Lusty Black Girl Love', 'Tempting Ebony Babes', 'Sultry Chocolate Queens Connect', 'Lovebug', 'Cupcake', 'Sugarplum', 
+            'Heartthrob', 'Snugglebear', 'Dreamboat', 'Charming', 'Dashing', 
+            'Romeo', 'Juliet', 'Loverboy', 'Princess'
+        ];
+
+        // Array of your image links
+        const profileImages = [
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAFzSk3abjntk8lLi0kjNQogvnQ2m3wPHwkg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV3SWOn_WeScRw5SaTH4w1bbt4mHR3rU6oog&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ZyhiT9niTht9TC8e46qJ1trPC2Bcs0AUlw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Q556HusGUTiGRRXcf_c0ZoeB4HSpDwN8LCpUZ_JfaSVPLt4No8zCPmA7&s=10',            
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEnK_56NHPb-N2xrmxGuW7ItXcPdcfkFRKg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNo8M_xbvVlfh4lQVgPuNTERMlO_lEppFoSw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr9OjJ5dxgP87BeZ9Q-Xin-YX-ajcX0y5-TQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRDhW0bOCN8rhLk-S8GWos-t_hvJtBXERx_g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDOaSqA15oVoFDdknObWAe-DvJioiPlWTXwA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScrwP0RwusUPCfP9vLaRn9786KkApGDx4IoYeChim0TzLU9Bv2K-O_FRA_&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQATvMP0NSmhH97zUTuqzkXipcF4iq21XVwkpbIRjTlDyNRZPSOMI7j88H6&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSEpUGnNG8I4Qzhtlj3kWxeGJAVOmdVPexMA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiAsaFdwiJDUqs7VPkCaYRC9jJ8LkYg3B3LCA22flcz7jT0xlwGr-Zrxs&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSg7Ws2CSlr5wYbkBHO8NTdk4jwF3PdpNhJxZvbeHz3TdpqfN6MmROxCR9&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfnXlV43KA6OSplW8FJ4R0WTFSiYTTfc-Dw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVOeLKLzHpbtRfS1iR-NliM4guejZhSsDxXg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0hNh3Lk1__XSSdGSy1pSHHS3-Zmd_H7yu-g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfgzvbiXFO99Y_FNRjx6VztudI0kIONLheNA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-DBoVonB4NnwMvH41kguVGCr4UQXhvMG1g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8dETkzoRQsrMLiAsvZ8GAX7aD_0Z3P51fCQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtcIoih5hd7zWskNsdlc1KcnJfOqiWiMJMww&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TS9NXnYcUyFrOjxUsZETUIGH6TxeLqbl7LPkA6SlBwNOQ0v6zUDRvxM&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6r52J-OFBc2r5sh-Nybm1f7C_eL1t_XsV2Q&usqp=CAU',
+            'https://lh3.googleusercontent.com/proxy/PkO3rDNJ45xahRWcikpAUWaZrWxfqZtoeHh_Wt5ivmnRhrrodJD5xfCWlCnhH0NOvR1wP_-NfzDEEpUbluUW278gQvxp7Z48UQfEKBOPE5T-_A',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFypp9unvUigLqVEKedNYml9dxr1g2FtKnBw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvOI2nl2jHn0tBWS1e33y4IOvYJ7nUAX8uZw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKVhN2N9IhpNXnE6vk3XIHe37-Y4-HNO0L0Q&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8mU441TfMGxh7uycTm7UjQCqHv4j1SCydxw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE4q-0XTafAIJNa1fOz9rSX8f2fEQd6RJQKw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF4oYLt8XzQXLKyKMD41CfcN1FpdxYXv52wA&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfoBJ1R5MRQFiSmfmxxfyMefmo8AK7MYFtLQ&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaIoeRwD_tmn7kO9yElyHQaoEdEoMHLsrZRg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwL8XSvt9A5jvQqhS3eHmXTam37EpGp4klLg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHLt61ExFzrzjJOwLrFcCokYOh_eRKjhwyw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2hctqh5I3SYC-hRqvpAVgYiMXb3eXLPK98Q&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwwyLsl0_3F6Thtjr8ayATF8UhDYhIhgaJsQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpLVwnVovHPuOownytsSCVQKN9ifif8xJz_g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzAlDPy5mbEPwg8h1C0oAocDiXSsa8zDZX4w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6SPYWs0AyoIvxQX_p_b4yqB2SIKiPrko4tg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_jOx44eEAD_R4U9SwgdlSTE135s3GFdIs1w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoPtx8cVmCavahCzbnHThcme1NDdqYLAN1aA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-KEY2HXWv0H4HFJwLQNIByu6eNjYHTJp3iA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFHZqDDo9U-gSF4qfwrFWRSwpXkAS0tszpXQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTljh2QWrLo9KY5vaO79w6xmUpAZZ29U1RcNg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7rZyIA1FFcCZtYd-T92FOQZ0Vm4XgCEdWCA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1P2fYUUbG4cWPJx801BYZVONTrdVqyzX57A&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTcKflNf7DzN4WNYphn1uIupIDFxgtDShu0w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Sac5yCvP28f-hjsjxw-HIhkfe21nXCjFRw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWO_BNbiROx6zcWdpnj7TT3aWCbNKnigfBXw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJlbFvF_I5eP0hMnJQo3VJgF1CHo0M4adxeQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQcQTQtBf_0mC-5cH8ApSQXR2XVcXW3EeZdw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Igd_sAw8GulyHl8NCnDL41OvcPLIa0kHHw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRj-xutjHGMAnNUi_vvrLxn4f9oVpR-k6vWA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4fkfkb9xVzedgBuIFoNThM4rJ-1Vda-7j5Q&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCERd7D4hNCgFL29iAihvvpKWLh4Gmu35kdQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0VQf8oMaTShZTNS7HGCdQH8W-QcL9bxrJJg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdaYZ1Dn1SXWYfEXS_BPaqkh-aV7bx3UFkig&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoRx9N7j0flwFMwB1Fch5x0s_WOxrh2AMINw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2Udcbb4xsAhaLfjSDT24m2vkeEZyn8XLs7A&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQdNX_rUkvo7Cg67441WW7ifAI4bRzYgPLsA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMQEgmqCq3-XI5UTQLauwiyK-Z8J-VVYoOgQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTShyj7xOYwxa-qrp1Z4MxVqTkXk5faLZpsCw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcCL9njdTwbpAZjAu_BKPhzEbFdLQWeAlQ0Q&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKbviKFo8-U13A4RVRdYOi2yCEHMe0nVPIg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgnAVIc2Qyqh9jC3Rl2tZax6NLE3FApskZPQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo50SY967Qc2ZWq-a6u902XeB2kO55VGQAIA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYvf8fqa0wTAOj4VRGzZVg_qk8ZGGjU13pOQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYoEbWHDm29LFyQGMUicW4ZKeVhbifj7IldA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdWlHHPJ78Lb2tW29iZel5Cj7SRUCYjG_dOQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkuT_ux-tsRBUocYrdk3MDhSmpXyofjy9MgQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK_v3GWkgvcJO_4k2rJc4kWOKJI2HLwTGZbA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRrI3AL4lVk5gKonBIrztEPhQpTjcPn5ZdAQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8iKgtJNV063nb8wG6hLqMaFqxTIpf01_g-g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzC6LEmumQaFtUYGWkk9b3g-UcCY8jfELugg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyBHGTq7J6Er7E6taiJHaz6FID-8ryhBPc7g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4R5KDEosC0c1pl-rN6_ATI_5qsq8xSjhZkw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB4XecPwp0qb_uOFiKzyYxJuO4_QfynFtMNA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVVgfeG79S7WwGTO3WXzcJ2j_amrXkHykcRA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBJZ4Bt0qxNIvzk6MNQnTyTEhf6FlLDALSuQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjz9ombGj6JuXK44wbX3A2j1dSwMSAuXqkTw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkt0AyZgwSNVgyMRf9pAj-n5H68mQrgKEEvA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThrD-WpoqqGJc1Bjfi09YG4ASKHIQIHWA-WQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwB7HWaB1whZ9OwjMPPydpzFyx0dOLgbH82w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6bM55vXTt5zL7T7oWqH8UgQTF4qkzBERH-w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZMn1XeDgufVYJag0m1ScKyGvhZ-6VWlB4hA&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJV3LrFkMhq69vJV8odiOJiKfm92RwO_kAOA&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovxdohY2NeB43U4u5yRj5RX67RKQd-PGgeQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwDKmcso9ivQJhHAxJkQ90PfO6k8-E-Unz3A&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVWMdtX-WTsglvqyvxpdd_ncO6dZHKPhfWQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShZyvTIk_wX-RyFqVq6PsCVvQ43DzDg1gF0g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS18rjV61pf-Kkw93P8fo_GMD9Idv57BgQegA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVwk28fGpCeiOnU_v4gM_xmmutlD4TdTaJNIBnnakQuc9oBcMJBSFomlvD&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSF3B1t8IKJ8SackXZ34Ul844J8t89K_fraw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqt2QSj2E9P9E8qneWPqKN-Y9sTrRgFqgLeQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXGH0eM6A3qIBu1SoHO2WKLiYXCVits4u_Wg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnQ25QveaSQZK_fkdPwIWz8mifUYrUoBJnPA&s://linkat.in/Getmynumber',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY0nVbVAyDMiNgAOJSyFMdr9JgXP6u-tnRjg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPri27yFhlF-MAVeozZ00A-tp5r8oH4QZLQA&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZtN2Z8Y0VCub7HXy1a1FNbkwA632bWbfQQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUgddTyJCjtmFXq-XYPADnuA_j2bhPr-iCFw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOzgVzG-UrcWB6i_pXRDZetIab4RVeGY6LfQ&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRig5Z4r9Na7WtvWMcPhMRWO-vxYITQxnGTEA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQBmNSSTyzY6qNUNXh3PWEO2voLlLDTFW6RA&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWtvsoXkUSxr4FhGEWif36fdhmQ3WYrsaSA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJdpCFIUFCozbAI1zxuOH8bdgzQ27mcg-zg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQah1H61b5BChnJoZkzH1VZ2ODQvOmYTMY71w&s',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEyWdR9JghLDjF8H1pjyQ1SrvpI7hMQD0jQA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUL6JxEUMLF9vvB2wq2-_VKmvUw1-eR3J49B4tiQBrj4tVz-_plQvabbE&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxFC7MTgJs5HxeKj5p-mCyMnIeoWx-PF8xV4buXfXiQwZ92G2fzioZicb1&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwRg4fw_NWyiGZcR8exPyuNNZLC5LspVCbQg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHhdSh1nBKZS8-Atw5Z6x4C4FrbAi5sC0Seg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQht92k0FECMx5KzD-8ry_UbRrXki2hAx2GZWxTnPwJGd1R8beor7qCFsua&s=10',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Mjaz0O_EaQKNImm9POuvfhgpgACKgbHX5A&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfHc9wIUpAZ6tGgHcuh7uMgSE73e3MiXrpIw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSwa4h6ctjlKYAuYjTJg7apT7yFzeclZBCVw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVSo425yfuohV1wofyHOHfSqGSqviMo3Ung&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSO6Bq9udLzcwFq-bJmd2B9Cq6oL9hMkZMuQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfMKZ1a1QxAhFHKbrcJTpbDX_qjWzlGbi5Rg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5So9rXG6_eILhT0bkgTqmiqo0Aa1kIGVr1g&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTczEUa2QtS5CvjAc9HFeZovoCLgtI1-Y5pYw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLZVsw3fF0MAcrvGRcjrocEyV3_cLkTVjZwA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNWUV_8MU3wINXnyYHfrvEcYG-L-EYEraRw&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfa6rq74f35M30YTaKz0OUrCcIrTS5eCC_tg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7J6K9NBmnl8oEF8zMIy3mOwH4_xutpGAgKQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuSff_LbXojRUX_oE7waI3d3-QualApp3T7w&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXdfy8AVTJV2b4BQ4xisLXBpyeGu1oScXmg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZS26U1UGiE2TlPDKUHLisbG4PJlyHg_jog&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnBczfXO7TJB2g9PXBFLz2wy69FOuh5mV7pg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSpWc12uRczAUU_zorKo-zqLhEeZDJITSmbA&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd9g4q6i8P29p9OF89IpJYDXFWxnUfT5nNgQ&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdeAXps2kgZGRgeulyGuYSEyLxLU44eFEUeg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5PMHi_5Kl3X2ucjuo7D0KafekF10godIfMg&usqp=CAU'
+          
+        ];
+
+        // Function to generate a random flirt name with "Whatsapp Group" suffix
+        function generateFlirtName() {
+            const randomIndex = Math.floor(Math.random() * flirtNames.length);
+            return flirtNames[randomIndex] + " Whatsapp Group";
+        }
+
+        // Function to select a random profile image from your links
+        function generateProfilePic() {
+            const randomIndex = Math.floor(Math.random() * profileImages.length);
+            return profileImages[randomIndex];
+        }
+
+        // Update the flirt name and profile picture on the page
+        document.getElementById('flirtName').innerText = generateFlirtName();
+        document.getElementById('profileImg').src = generateProfilePic();
+
+        // Redirect when "Join Us" button is clicked
+        document.getElementById('callBtn').addEventListener('click', function () {
+            // Redirect to a specific URL
+            window.location.href = 'http://link.Afrobangtv.com.ng/hornyhookup'; // Change this to your desired link
+        });
+    </script>
+</body>
+          </html>
