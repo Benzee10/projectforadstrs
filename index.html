@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Play Button Preview Generator</title>
+  <title>Bulk Play Button Preview Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       background: #111;
       color: #eee;
       font-family: Arial, sans-serif;
-      max-width: 700px;
+      max-width: 900px;
       margin: auto;
       padding: 20px;
     }
-    input, button {
+    textarea, button {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
@@ -21,6 +21,7 @@
       border-radius: 6px;
       border: none;
       box-sizing: border-box;
+      font-family: monospace;
     }
     button {
       background-color: #ff3399;
@@ -31,84 +32,133 @@
     canvas {
       display: none;
     }
+    .preview-item {
+      margin-bottom: 30px;
+      border: 1px solid #444;
+      padding: 15px;
+      border-radius: 12px;
+      background: #222;
+    }
     .preview-img {
-      margin-top: 20px;
       max-width: 100%;
       border-radius: 10px;
-      border: 1px solid #444;
+      display: block;
+      margin: 0 auto 10px auto;
     }
     .download-btn {
       background-color: #00cc66;
-      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .error-msg {
+      color: #ff4444;
+      font-weight: bold;
+      margin-top: 5px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <h2>🎬 Play Button Preview Generator</h2>
+  <h2>📺 Bulk Play Button Preview Generator</h2>
+  <p>Paste one image URL per line below:</p>
+  <textarea id="imageUrls" rows="6" placeholder="Paste image URLs here..."></textarea>
+  <button id="generateBtn">Generate Previews</button>
 
-  <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
-  <button id="generateBtn">Generate Preview</button>
+  <div id="results"></div>
 
-  <canvas id="previewCanvas"></canvas>
-
-  <div id="output"></div>
+  <canvas id="hiddenCanvas"></canvas>
 
   <script>
     const generateBtn = document.getElementById("generateBtn");
-    const canvas = document.getElementById("previewCanvas");
+    const results = document.getElementById("results");
+    const canvas = document.getElementById("hiddenCanvas");
     const ctx = canvas.getContext("2d");
-    const output = document.getElementById("output");
 
-    generateBtn.addEventListener("click", () => {
-      const imageUrl = document.getElementById("imageUrl").value.trim();
+    generateBtn.addEventListener("click", async () => {
+      const urlsRaw = document.getElementById("imageUrls").value.trim();
+      if (!urlsRaw) {
+        alert("Please paste some image URLs!");
+        return;
+      }
 
-      if (!imageUrl) return alert("Please enter an image URL.");
+      generateBtn.disabled = true;
+      results.innerHTML = "<p>Generating previews, please wait...</p>";
 
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = imageUrl;
+      const urls = urlsRaw.split(/\r?\n/).filter(u => u.trim() !== "");
+      results.innerHTML = "";
 
-      img.onload = () => {
-        // Draw image
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
+      for (let i = 0; i < urls.length; i++) {
+        const url = urls[i].trim();
+        await generatePreview(url, i);
+      }
 
-        // Draw play button
-        const centerX = img.width / 2;
-        const centerY = img.height / 2;
-        const radius = Math.min(img.width, img.height) / 6;
-
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
-        ctx.fill();
-
-        ctx.beginPath();
-        const triangleSize = radius * 0.6;
-        ctx.moveTo(centerX - triangleSize / 2, centerY - triangleSize);
-        ctx.lineTo(centerX - triangleSize / 2, centerY + triangleSize);
-        ctx.lineTo(centerX + triangleSize, centerY);
-        ctx.closePath();
-        ctx.fillStyle = "white";
-        ctx.fill();
-
-        const dataURL = canvas.toDataURL("image/jpeg", 0.95);
-
-        output.innerHTML = `
-          <h3>Preview Image with Play Button:</h3>
-          <img class="preview-img" src="${dataURL}" alt="Preview Image" />
-          <a href="${dataURL}" download="preview.jpg">
-            <button class="download-btn">⬇️ Download Image</button>
-          </a>
-        `;
-      };
-
-      img.onerror = () => {
-        alert("❌ Failed to load image. Try another image URL that supports CORS.");
-      };
+      generateBtn.disabled = false;
     });
+
+    function generatePreview(url, index) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = url;
+
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+
+          // Draw play button
+          const centerX = img.width / 2;
+          const centerY = img.height / 2;
+          const radius = Math.min(img.width, img.height) / 6;
+
+          ctx.beginPath();
+          ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+          ctx.fillStyle = "rgba(0,0,0,0.5)";
+          ctx.fill();
+
+          ctx.beginPath();
+          const triangleSize = radius * 0.6;
+          ctx.moveTo(centerX - triangleSize / 2, centerY - triangleSize);
+          ctx.lineTo(centerX - triangleSize / 2, centerY + triangleSize);
+          ctx.lineTo(centerX + triangleSize, centerY);
+          ctx.closePath();
+          ctx.fillStyle = "white";
+          ctx.fill();
+
+          const dataURL = canvas.toDataURL("image/jpeg", 0.95);
+
+          const container = document.createElement("div");
+          container.classList.add("preview-item");
+          container.innerHTML = `
+            <img class="preview-img" src="${dataURL}" alt="Preview Image #${index + 1}" />
+            <a href="${dataURL}" download="preview_${index + 1}.jpg">
+              <button class="download-btn">⬇️ Download Image #${index + 1}</button>
+            </a>
+          `;
+
+          results.appendChild(container);
+          resolve();
+        };
+
+        img.onerror = () => {
+          const container = document.createElement("div");
+          container.classList.add("preview-item");
+          container.innerHTML = `
+            <p class="error-msg">❌ Failed to load image #${index + 1}:<br> ${url}</p>
+          `;
+          results.appendChild(container);
+          resolve();
+        };
+      });
+    }
   </script>
 </body>
 </html>
