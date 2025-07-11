@@ -2,158 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Play Button Preview Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Single Image Preview Generator with Play Button</title>
   <style>
     body {
-      background: #121212;
+      background: #111;
       color: #eee;
       font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
-      text-align: center;
+      padding: 20px;
     }
-    input[type=text] {
+    input, button {
       width: 100%;
       padding: 12px;
+      margin: 10px 0;
       font-size: 16px;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
       box-sizing: border-box;
-      margin-bottom: 10px;
     }
     button {
-      background: #ff3399;
+      background-color: #ff3399;
       color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
-      margin-bottom: 20px;
-      width: 100%;
     }
     canvas {
       max-width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
       border: 1px solid #444;
-      border-radius: 8px;
-      margin-bottom: 15px;
     }
     .html-snippet {
-      background: #111;
-      padding: 10px;
-      border-radius: 6px;
-      font-family: monospace;
+      margin-top: 20px;
+      background: #222;
+      padding: 12px;
+      border-radius: 8px;
       white-space: pre-wrap;
-      word-break: break-word;
+      font-family: monospace;
       user-select: all;
     }
   </style>
 </head>
 <body>
 
-<h2>Generate Preview for One Image</h2>
+  <h2>🎬 Generate Preview with Play Button</h2>
 
-<input type="text" id="imageUrl" placeholder="Paste image URL here" />
-<input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
+  <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
+  <input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
+  <button id="generateBtn">Generate Preview</button>
 
-<button id="generateBtn">Generate Preview</button>
+  <canvas id="previewCanvas" style="display:none;"></canvas>
 
-<canvas id="canvas" style="display:none;"></canvas>
+  <div id="output"></div>
 
-<div id="result"></div>
+  <script>
+    const generateBtn = document.getElementById("generateBtn");
+    const canvas = document.getElementById("previewCanvas");
+    const ctx = canvas.getContext("2d");
+    const output = document.getElementById("output");
 
-<script>
-  const generateBtn = document.getElementById('generateBtn');
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  const resultDiv = document.getElementById('result');
+    generateBtn.addEventListener("click", () => {
+      const imageUrl = document.getElementById("imageUrl").value.trim();
+      const redirectUrl = document.getElementById("redirectUrl").value.trim();
 
-  function addPlayButtonToImage(img) {
-    canvas.width = img.width;
-    canvas.height = img.height;
+      if (!imageUrl) return alert("Please enter an image URL.");
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = imageUrl;
 
-    const size = Math.min(img.width, img.height) / 4;
-    const centerX = img.width / 2;
-    const centerY = img.height / 2;
+      img.onload = () => {
+        // Draw image on canvas
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
 
-    // Draw semi-transparent circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, size / 1.5, 0, 2 * Math.PI);
-    ctx.fillStyle = "rgba(0,0,0,0.5)";
-    ctx.fill();
+        // Draw play button
+        const centerX = img.width / 2;
+        const centerY = img.height / 2;
+        const radius = Math.min(img.width, img.height) / 6;
 
-    // Draw white play triangle
-    ctx.beginPath();
-    ctx.moveTo(centerX - size / 3, centerY - size / 2.5);
-    ctx.lineTo(centerX - size / 3, centerY + size / 2.5);
-    ctx.lineTo(centerX + size / 2, centerY);
-    ctx.closePath();
-    ctx.fillStyle = "white";
-    ctx.fill();
-  }
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fill();
 
-  generateBtn.addEventListener('click', () => {
-    const imageUrl = document.getElementById('imageUrl').value.trim();
-    const redirectUrl = document.getElementById('redirectUrl').value.trim() || "https://t.me/Xibabes";
+        ctx.beginPath();
+        const triangleSize = radius * 0.6;
+        ctx.moveTo(centerX - triangleSize / 2, centerY - triangleSize);
+        ctx.lineTo(centerX - triangleSize / 2, centerY + triangleSize);
+        ctx.lineTo(centerX + triangleSize, centerY);
+        ctx.closePath();
+        ctx.fillStyle = "white";
+        ctx.fill();
 
-    if (!imageUrl) {
-      alert("Please enter an image URL");
-      return;
-    }
+        canvas.style.display = "block";
 
-    const img = new Image();
-    img.crossOrigin = "anonymous"; // try CORS, but may fail if server disallows
-    img.onload = () => {
-      addPlayButtonToImage(img);
-      canvas.style.display = "block";
+        // Generate base64 preview
+        const dataURL = canvas.toDataURL("image/jpeg", 0.95);
 
-      const dataURL = canvas.toDataURL("image/jpeg", 0.95);
-
-      const previewPageName = "preview.html"; // single page name
-      const pageUrl = `https://yourdomain.com/${previewPageName}`; // CHANGE this to your actual domain + path
-
-      const htmlSnippet = `<!DOCTYPE html>
+        // Generate HTML preview snippet
+        const previewHTML = `
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Preview</title>
-<meta property="og:type" content="website" />
-<meta property="og:url" content="${pageUrl}" />
-<meta property="og:title" content="Exclusive Invite 💋" />
-<meta property="og:description" content="Join the private circle now. 18+ only." />
-<meta property="og:image" content="${dataURL}" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <title>Exclusive Invite 💋</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/preview.html" />
+  <meta property="og:title" content="Exclusive Invite 💋" />
+  <meta property="og:description" content="Join the private circle now. 18+ only." />
+  <meta property="og:image" content="${dataURL}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-<h2>Redirecting...</h2>
-<script>
-  setTimeout(() => {
-    window.location.href = "${redirectUrl}";
-  }, 2000);
-</script>
+  <p>Redirecting to your invitation...</p>
+  <script>
+    setTimeout(() => {
+      window.location.href = "${redirectUrl}";
+    }, 2000);
+  </script>
 </body>
 </html>`;
 
-      resultDiv.innerHTML = `
-        <h3>Preview Image:</h3>
-        <img src="${dataURL}" alt="Preview with Play Button" style="max-width:100%;border-radius:10px;box-shadow:0 0 15px #ff3399;" />
-        <h3>Generated HTML Preview Page:</h3>
-        <pre class="html-snippet" contenteditable spellcheck="false">${htmlSnippet}</pre>
-      `;
-    };
+        output.innerHTML = `
+          <h3>Preview Image with Play Button:</h3>
+          <img src="${dataURL}" style="max-width:100%;border-radius:10px;" />
+          <h3>HTML Preview Snippet:</h3>
+          <div class="html-snippet">${previewHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+        `;
+      };
 
-    img.onerror = () => {
-      alert("Failed to load image. Try a CORS-enabled image URL.");
-    };
-
-    img.src = imageUrl;
-  });
-</script>
-
+      img.onerror = () => {
+        alert("❌ Failed to load image. Try another CORS-supported image URL.");
+      };
+    });
+  </script>
 </body>
 </html>
