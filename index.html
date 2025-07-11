@@ -1,99 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Link + Preview Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { background: #111; color: #fff; font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-    input, textarea, button { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 6px; font-size: 1rem; }
-    button { background: #28a745; color: white; font-weight: bold; border: none; }
-    label { font-weight: bold; margin-top: 10px; display: block; }
-    .shortlink { margin-top: 20px; word-wrap: break-word; font-size: 0.9rem; background: #222; padding: 10px; border-radius: 6px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auto Preview Generator with Play Button</title>
+<style>
+  body {
+    background: #121212;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  textarea, input[type=text] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+  }
+  button {
+    background: #ff3399;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px 0 25px 0;
+    display: block;
+    width: 100%;
+  }
+  button:disabled {
+    background: #555;
+    cursor: not-allowed;
+  }
+  .preview-item {
+    background: #222;
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  canvas {
+    max-width: 100%;
+    border: 1px solid #444;
+    border-radius: 8px;
+  }
+  .image-preview {
+    margin-top: 10px;
+  }
+  .html-snippet {
+    background: #111;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    user-select: all;
+  }
+  label {
+    display: block;
+    margin: 15px 0 5px 0;
+  }
+</style>
 </head>
 <body>
-  <h2>🎯 Generate Preview Page + Short Link</h2>
 
-  <label>Page Name (e.g. ava)</label>
-  <input id="name" placeholder="ava" />
+<h1>Auto Preview Generator with Play Button</h1>
 
-  <label>Title</label>
-  <input id="title" placeholder="🔥 Ava’s Secret Room" />
+<label for="imageUrls">Paste image URLs (one per line):</label>
+<textarea id="imageUrls" rows="8" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
 
-  <label>Description</label>
-  <textarea id="desc" placeholder="Step into Ava’s seductive room – 18+ only."></textarea>
+<label for="redirectUrl">Redirect URL (where user goes on preview click):</label>
+<input type="text" id="redirectUrl" placeholder="https://t.me/Xibabes" value="https://t.me/Xibabes" />
 
-  <label>OG Image URL</label>
-  <input id="img" placeholder="https://cdn.example.com/image.jpg" />
+<button id="startBtn">Generate Previews</button>
 
-  <label>Redirect To (e.g. Telegram)</label>
-  <input id="url" placeholder="https://t.me/Xibabes" />
+<div id="results"></div>
 
-  <button onclick="generate()">Generate + Shorten</button>
+<script>
+  const startBtn = document.getElementById("startBtn");
+  const results = document.getElementById("results");
 
-  <div id="result" class="shortlink"></div>
+  function addPlayButtonToImage(img, canvas) {
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.width;
+    canvas.height = img.height;
 
-  <script>
-    async function generate() {
-      const name = nameInput.value.trim();
-      const title = titleInput.value.trim();
-      const desc = descInput.value.trim();
-      const img = imgInput.value.trim();
-      const url = urlInput.value.trim();
+    ctx.drawImage(img, 0, 0);
 
-      const resultDiv = document.getElementById("result");
+    // Draw semi-transparent circle
+    const size = Math.min(img.width, img.height) / 4;
+    const centerX = img.width / 2;
+    const centerY = img.height / 2;
 
-      if (!name || !title || !desc || !img || !url) {
-        resultDiv.innerText = "❌ Fill all fields";
-        return;
-      }
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, size / 1.5, 0, 2 * Math.PI);
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
+    ctx.fill();
 
-      const html = `
-<!DOCTYPE html>
+    // Draw white triangle (play button)
+    ctx.beginPath();
+    ctx.moveTo(centerX - size / 3, centerY - size / 2.5);
+    ctx.lineTo(centerX - size / 3, centerY + size / 2.5);
+    ctx.lineTo(centerX + size / 2, centerY);
+    ctx.closePath();
+    ctx.fillStyle = "white";
+    ctx.fill();
+  }
+
+  async function generatePreview(index, url, redirectUrl) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = url;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        addPlayButtonToImage(img, canvas);
+
+        // Convert to dataURL
+        const dataURL = canvas.toDataURL("image/jpeg", 0.95);
+
+        // Generate a fake filename & preview page name
+        const previewPageName = `preview-${index + 1}.html`;
+        const pageUrl = `https://yourdomain.com/${previewPageName}`; // <- CHANGE to your domain
+
+        // Generate HTML snippet with OG tags and redirect
+        const htmlSnippet = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>${title}</title>
-  <meta name="description" content="${desc}" />
-  <meta property="og:title" content="${title}" />
-  <meta property="og:image" content="${img}" />
-  <meta property="og:description" content="${desc}" />
-  <meta property="og:url" content="https://datingredirect.vercel.app/${name}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta http-equiv="refresh" content="0; url=${url}" />
+<meta charset="UTF-8" />
+<title>Preview ${index + 1}</title>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="${pageUrl}" />
+<meta property="og:title" content="Exclusive Invite 💋" />
+<meta property="og:description" content="Join the private circle now. 18+ only." />
+<meta property="og:image" content="${dataURL}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-  <p>Redirecting to ${title}...</p>
+<h2>Redirecting...</h2>
+<script>
+  setTimeout(() => {
+    window.location.href = "${redirectUrl}";
+  }, 2000);
+</script>
 </body>
 </html>`;
 
-      // Download HTML
-      const blob = new Blob([html], { type: "text/html" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `${name}.html`;
-      link.click();
+        resolve({ index, dataURL, htmlSnippet, previewPageName });
+      };
 
-      // Call your Google Apps Script to shorten
-      const response = await fetch(`https://script.google.com/macros/s/AKfycbysfjJy7gUb05cAz-Ai9b5wCaJ87dlebJ19ayjIflNW38UlAFGE72eZh8o82OAvg7EJMQ/exec?url=https://datingredirect.vercel.app/${name}`);
-      const data = await response.json();
+      img.onerror = () => {
+        resolve({ index, error: true, url });
+      };
+    });
+  }
 
-      if (data.short) {
-        resultDiv.innerHTML = `
-          ✅ Short link: <br>
-          <a href="${data.short}" style="color:#4cd137;" target="_blank">${data.short}</a>
-          <br><br><button onclick="navigator.clipboard.writeText('${data.short}')">📋 Copy</button>
-        `;
-      } else {
-        resultDiv.innerText = "❌ Error shortening: " + (data.error || "Unknown");
-      }
+  startBtn.addEventListener("click", async () => {
+    startBtn.disabled = true;
+    results.innerHTML = "<p>Generating previews, please wait...</p>";
+
+    const urlsRaw = document.getElementById("imageUrls").value.trim();
+    const redirectUrl = document.getElementById("redirectUrl").value.trim() || "https://t.me/Xibabes";
+
+    if (!urlsRaw) {
+      alert("Please paste some image URLs!");
+      startBtn.disabled = false;
+      return;
     }
 
-    const nameInput = document.getElementById("name");
-    const titleInput = document.getElementById("title");
-    const descInput = document.getElementById("desc");
-    const imgInput = document.getElementById("img");
-    const urlInput = document.getElementById("url");
-  </script>
+    const urls = urlsRaw.split(/\r?\n/);
+    results.innerHTML = "";
+
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i].trim();
+      if (!url) continue;
+
+      const result = await generatePreview(i, url, redirectUrl);
+
+      const container = document.createElement("div");
+      container.classList.add("preview-item");
+
+      if (result.error) {
+        container.innerHTML = `<strong>⚠️ Failed to load:</strong> <br>${result.url}`;
+      } else {
+        container.innerHTML = `
+          <strong>Preview #${result.index + 1}</strong>
+          <canvas width="300"></canvas>
+          <div class="html-snippet" contenteditable="true" spellcheck="false"></div>
+        `;
+
+        const canvas = container.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const previewImg = new Image();
+        previewImg.onload = () => {
+          canvas.width = previewImg.width > 300 ? 300 : previewImg.width;
+          canvas.height = previewImg.height * (canvas.width / previewImg.width);
+          ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
+        };
+        previewImg.src = result.dataURL;
+
+        container.querySelector(".html-snippet").textContent = result.htmlSnippet;
+      }
+
+      results.appendChild(container);
+    }
+
+    startBtn.disabled = false;
+  });
+</script>
+
 </body>
-</html>
+    </html>
