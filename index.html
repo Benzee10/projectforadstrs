@@ -50,7 +50,7 @@
   <h2>🎬 Generate Preview with Play Button</h2>
 
   <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
-  <input type="text" id="redirectUrl" placeholder="Redirect URL" value="https://t.me/Xibabes" />
+  <input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
   <button id="generateBtn">Generate Preview</button>
 
   <canvas id="previewCanvas" style="display:none;"></canvas>
@@ -102,29 +102,31 @@
 
         const dataURL = canvas.toDataURL("image/jpeg", 0.95);
 
-        const escapedHTML = `
+        // Generate preview HTML and escape for display
+        const rawHTML = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Exclusive Invite 💋</title>
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/preview.html" />
-  <meta property="og:title" content="Exclusive Invite 💋" />
-  <meta property="og:description" content="Join the private circle now. 18+ only." />
-  <meta property="og:image" content="${dataURL}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/preview.html">
+  <meta property="og:title" content="Exclusive Invite 💋">
+  <meta property="og:description" content="Join the private circle now. 18+ only.">
+  <meta property="og:image" content="${dataURL}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <p>Redirecting to your invitation...</p>
+  <p>Redirecting...</p>
   <script>
     setTimeout(() => {
       window.location.href = "${redirectUrl}";
     }, 2000);
   </script>
 </body>
-</html>
-        `.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+</html>`;
+
+        const escapedHTML = rawHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
         output.innerHTML = `
           <h3>Preview Image with Play Button:</h3>
@@ -135,7 +137,7 @@
       };
 
       img.onerror = () => {
-        alert("❌ Failed to load image. Try a different one.");
+        alert("❌ Failed to load image. Try another CORS-enabled image.");
       };
     });
   </script>
