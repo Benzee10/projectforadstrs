@@ -1,113 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Auto Preview Generator with Play Button</title>
-<style>
-  body {
-    background: #121212;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  textarea, input[type=text] {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 8px;
-    border: none;
-    box-sizing: border-box;
-  }
-  button {
-    background: #ff3399;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px 0 25px 0;
-    display: block;
-    width: 100%;
-  }
-  button:disabled {
-    background: #555;
-    cursor: not-allowed;
-  }
-  .preview-item {
-    background: #222;
-    margin-bottom: 25px;
-    padding: 15px;
-    border-radius: 10px;
-  }
-  canvas {
-    max-width: 100%;
-    border: 1px solid #444;
-    border-radius: 8px;
-  }
-  .image-preview {
-    margin-top: 10px;
-  }
-  .html-snippet {
-    background: #111;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 10px;
-    font-family: monospace;
-    white-space: pre-wrap;
-    word-break: break-word;
-    user-select: all;
-  }
-  label {
-    display: block;
-    margin: 15px 0 5px 0;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Single Image Preview Generator with Play Button</title>
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    input[type=text] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #ff3399;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    canvas {
+      max-width: 100%;
+      border: 1px solid #444;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .html-snippet {
+      background: #111;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      user-select: all;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Auto Preview Generator with Play Button</h1>
+<h2>Generate Preview for One Image</h2>
 
-<label for="imageUrls">Paste image URLs (one per line):</label>
-<textarea id="imageUrls" rows="8" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
+<input type="text" id="imageUrl" placeholder="Paste image URL here" />
+<input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
 
-<label for="redirectUrl">Redirect URL (where user goes on preview click):</label>
-<input type="text" id="redirectUrl" placeholder="https://t.me/Xibabes" value="https://t.me/Xibabes" />
+<button id="generateBtn">Generate Preview</button>
 
-<button id="startBtn">Generate Previews</button>
+<canvas id="canvas" style="display:none;"></canvas>
 
-<div id="results"></div>
+<div id="result"></div>
 
 <script>
-  const startBtn = document.getElementById("startBtn");
-  const results = document.getElementById("results");
+  const generateBtn = document.getElementById('generateBtn');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const resultDiv = document.getElementById('result');
 
-  function addPlayButtonToImage(img, canvas) {
-    const ctx = canvas.getContext("2d");
+  function addPlayButtonToImage(img) {
     canvas.width = img.width;
     canvas.height = img.height;
 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0);
 
-    // Draw semi-transparent circle
     const size = Math.min(img.width, img.height) / 4;
     const centerX = img.width / 2;
     const centerY = img.height / 2;
 
+    // Draw semi-transparent circle
     ctx.beginPath();
     ctx.arc(centerX, centerY, size / 1.5, 0, 2 * Math.PI);
     ctx.fillStyle = "rgba(0,0,0,0.5)";
     ctx.fill();
 
-    // Draw white triangle (play button)
+    // Draw white play triangle
     ctx.beginPath();
     ctx.moveTo(centerX - size / 3, centerY - size / 2.5);
     ctx.lineTo(centerX - size / 3, centerY + size / 2.5);
@@ -117,29 +97,31 @@
     ctx.fill();
   }
 
-  async function generatePreview(index, url, redirectUrl) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src = url;
+  generateBtn.addEventListener('click', () => {
+    const imageUrl = document.getElementById('imageUrl').value.trim();
+    const redirectUrl = document.getElementById('redirectUrl').value.trim() || "https://t.me/Xibabes";
 
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        addPlayButtonToImage(img, canvas);
+    if (!imageUrl) {
+      alert("Please enter an image URL");
+      return;
+    }
 
-        // Convert to dataURL
-        const dataURL = canvas.toDataURL("image/jpeg", 0.95);
+    const img = new Image();
+    img.crossOrigin = "anonymous"; // try CORS, but may fail if server disallows
+    img.onload = () => {
+      addPlayButtonToImage(img);
+      canvas.style.display = "block";
 
-        // Generate a fake filename & preview page name
-        const previewPageName = `preview-${index + 1}.html`;
-        const pageUrl = `https://yourdomain.com/${previewPageName}`; // <- CHANGE to your domain
+      const dataURL = canvas.toDataURL("image/jpeg", 0.95);
 
-        // Generate HTML snippet with OG tags and redirect
-        const htmlSnippet = `<!DOCTYPE html>
+      const previewPageName = "preview.html"; // single page name
+      const pageUrl = `https://yourdomain.com/${previewPageName}`; // CHANGE this to your actual domain + path
+
+      const htmlSnippet = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Preview ${index + 1}</title>
+<title>Preview</title>
 <meta property="og:type" content="website" />
 <meta property="og:url" content="${pageUrl}" />
 <meta property="og:title" content="Exclusive Invite 💋" />
@@ -157,69 +139,21 @@
 </body>
 </html>`;
 
-        resolve({ index, dataURL, htmlSnippet, previewPageName });
-      };
+      resultDiv.innerHTML = `
+        <h3>Preview Image:</h3>
+        <img src="${dataURL}" alt="Preview with Play Button" style="max-width:100%;border-radius:10px;box-shadow:0 0 15px #ff3399;" />
+        <h3>Generated HTML Preview Page:</h3>
+        <pre class="html-snippet" contenteditable spellcheck="false">${htmlSnippet}</pre>
+      `;
+    };
 
-      img.onerror = () => {
-        resolve({ index, error: true, url });
-      };
-    });
-  }
+    img.onerror = () => {
+      alert("Failed to load image. Try a CORS-enabled image URL.");
+    };
 
-  startBtn.addEventListener("click", async () => {
-    startBtn.disabled = true;
-    results.innerHTML = "<p>Generating previews, please wait...</p>";
-
-    const urlsRaw = document.getElementById("imageUrls").value.trim();
-    const redirectUrl = document.getElementById("redirectUrl").value.trim() || "https://t.me/Xibabes";
-
-    if (!urlsRaw) {
-      alert("Please paste some image URLs!");
-      startBtn.disabled = false;
-      return;
-    }
-
-    const urls = urlsRaw.split(/\r?\n/);
-    results.innerHTML = "";
-
-    for (let i = 0; i < urls.length; i++) {
-      const url = urls[i].trim();
-      if (!url) continue;
-
-      const result = await generatePreview(i, url, redirectUrl);
-
-      const container = document.createElement("div");
-      container.classList.add("preview-item");
-
-      if (result.error) {
-        container.innerHTML = `<strong>⚠️ Failed to load:</strong> <br>${result.url}`;
-      } else {
-        container.innerHTML = `
-          <strong>Preview #${result.index + 1}</strong>
-          <canvas width="300"></canvas>
-          <div class="html-snippet" contenteditable="true" spellcheck="false"></div>
-        `;
-
-        const canvas = container.querySelector("canvas");
-        const ctx = canvas.getContext("2d");
-
-        const previewImg = new Image();
-        previewImg.onload = () => {
-          canvas.width = previewImg.width > 300 ? 300 : previewImg.width;
-          canvas.height = previewImg.height * (canvas.width / previewImg.width);
-          ctx.drawImage(previewImg, 0, 0, canvas.width, canvas.height);
-        };
-        previewImg.src = result.dataURL;
-
-        container.querySelector(".html-snippet").textContent = result.htmlSnippet;
-      }
-
-      results.appendChild(container);
-    }
-
-    startBtn.disabled = false;
+    img.src = imageUrl;
   });
 </script>
 
 </body>
-    </html>
+</html>
