@@ -50,7 +50,7 @@
   <h2>🎬 Generate Preview with Play Button</h2>
 
   <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
-  <input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
+  <input type="text" id="redirectUrl" placeholder="Redirect URL" value="https://t.me/Xibabes" />
   <button id="generateBtn">Generate Preview</button>
 
   <canvas id="previewCanvas" style="display:none;"></canvas>
@@ -100,11 +100,9 @@
 
         canvas.style.display = "block";
 
-        // Generate base64 preview
         const dataURL = canvas.toDataURL("image/jpeg", 0.95);
 
-        // Generate HTML preview snippet
-        const previewHTML = `
+        const escapedHTML = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,18 +123,19 @@
     }, 2000);
   </script>
 </body>
-</html>`;
+</html>
+        `.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
         output.innerHTML = `
           <h3>Preview Image with Play Button:</h3>
           <img src="${dataURL}" style="max-width:100%;border-radius:10px;" />
           <h3>HTML Preview Snippet:</h3>
-          <div class="html-snippet">${previewHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+          <div class="html-snippet">${escapedHTML}</div>
         `;
       };
 
       img.onerror = () => {
-        alert("❌ Failed to load image. Try another CORS-supported image URL.");
+        alert("❌ Failed to load image. Try a different one.");
       };
     });
   </script>
