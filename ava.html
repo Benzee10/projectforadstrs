@@ -1,20 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Luna Pica secrets room</title>
-  <meta property="og:title" content="🔥 Ava’s Secret Room">
-<meta property="og:image" content="https://i.postimg.cc/kgxvXRgn/Gemini-Generated-Image-oylpjxoylpjxoylp.png">
-<meta property="og:description" content="Step into Ava’s private zone — 18+ only">
-...
+  <meta charset="UTF-8" />
+  <title>Image Padder + Postimg Upload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    input, button, select {
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 16px;
+      display: block;
+      width: 90%;
+    }
+    canvas {
+      margin-top: 20px;
+      border: 1px solid #333;
+      max-width: 100%;
+    }
+    #output-link {
+      margin-top: 15px;
+      word-wrap: break-word;
+      color: #0f0;
+    }
+  </style>
 </head>
-  <script>
-  setTimeout(() => {
-    window.location.href = "https://datingredirect.vercel.app";
-  }, 8000);
-  </script>
 <body>
-  <p>Redirecting to Luna Pica secrets room...</p>
-  
+  <h2>📐 Image Padder + Upload to Postimg</h2>
+
+  <input type="text" id="imageUrl" placeholder="Paste image URL (.jpg, .png, etc)" />
+  <select id="bgColor">
+    <option value="#ffffff">White</option>
+    <option value="#000000">Black</option>
+    <option value="#ff69b4">Hot Pink</option>
+  </select>
+
+  <button onclick="loadImage()">🖼️ Load + Pad</button>
+  <button onclick="downloadImage()">⬇️ Download 1200x630</button>
+  <button onclick="uploadToPostimg()">☁️ Upload to Postimg</button>
+
+  <canvas id="canvas" width="1200" height="630"></canvas>
+
+  <p id="output-link"></p>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function loadImage() {
+      const url = document.getElementById("imageUrl").value.trim();
+      const bg = document.getElementById("bgColor").value;
+
+      if (!url || !url.match(/\.(jpeg|jpg|png|webp)$/i)) {
+        alert("❌ Please enter a valid image URL.");
+        return;
+      }
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const scale = 630 / img.height;
+        const newWidth = img.width * scale;
+        const xOffset = (1200 - newWidth) / 2;
+
+        ctx.drawImage(img, xOffset, 0, newWidth, 630);
+      };
+      img.onerror = () => alert("⚠️ Failed to load image.");
+      img.src = url;
+    }
+
+    function downloadImage() {
+      const link = document.createElement("a");
+      link.download = "facebook-preview.jpg";
+      link.href = canvas.toDataURL("image/jpeg", 0.9);
+      link.click();
+    }
+
+    function uploadToPostimg() {
+      canvas.toBlob(async (blob) => {
+        const formData = new FormData();
+        formData.append("upload", blob, "padded-image.jpg");
+
+        try {
+          const res = await fetch("https://postimages.org/json/rr", {
+            method: "POST",
+            body: formData
+          });
+          const data = await res.json();
+
+          if (data && data.url) {
+            document.getElementById("output-link").innerHTML =
+              `✅ Uploaded: <a href="${data.url}" target="_blank" style="color: #0f0">${data.url}</a>`;
+          } else {
+            document.getElementById("output-link").textContent =
+              "❌ Upload failed. Try again.";
+          }
+        } catch (e) {
+          document.getElementById("output-link").textContent =
+            "❌ Error uploading to Postimg.";
+        }
+      }, "image/jpeg", 0.9);
+    }
+  </script>
 </body>
-</html>
+  </html>
