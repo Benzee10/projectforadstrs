@@ -43,11 +43,21 @@
       font-family: monospace;
       user-select: all;
     }
+    .preview-img {
+      margin-top: 20px;
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid #444;
+    }
+    .download-btn {
+      background-color: #00cc66;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <h2>🎬 Generate Preview with Play Button</h2>
+  <h2>🎬 Play Button Preview Generator</h2>
 
   <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
   <input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
@@ -102,7 +112,7 @@
 
         const dataURL = canvas.toDataURL("image/jpeg", 0.95);
 
-        // Generate preview HTML and escape for display
+        // Generate HTML preview with OG tags
         const rawHTML = `
 <!DOCTYPE html>
 <html lang="en">
@@ -126,18 +136,23 @@
 </body>
 </html>`;
 
-        const escapedHTML = rawHTML.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const escapedHTML = rawHTML
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
 
         output.innerHTML = `
           <h3>Preview Image with Play Button:</h3>
-          <img src="${dataURL}" style="max-width:100%;border-radius:10px;" />
+          <img class="preview-img" src="${dataURL}" alt="Preview Image" />
+          <a href="${dataURL}" download="preview.jpg">
+            <button class="download-btn">⬇️ Download Image</button>
+          </a>
           <h3>HTML Preview Snippet:</h3>
           <div class="html-snippet">${escapedHTML}</div>
         `;
       };
 
       img.onerror = () => {
-        alert("❌ Failed to load image. Try another CORS-enabled image.");
+        alert("❌ Failed to load image. Try another CORS-enabled image URL.");
       };
     });
   </script>
