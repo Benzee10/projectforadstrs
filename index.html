@@ -29,19 +29,7 @@
       cursor: pointer;
     }
     canvas {
-      max-width: 100%;
-      margin-top: 15px;
-      border-radius: 10px;
-      border: 1px solid #444;
-    }
-    .html-snippet {
-      margin-top: 20px;
-      background: #222;
-      padding: 12px;
-      border-radius: 8px;
-      white-space: pre-wrap;
-      font-family: monospace;
-      user-select: all;
+      display: none;
     }
     .preview-img {
       margin-top: 20px;
@@ -60,10 +48,9 @@
   <h2>🎬 Play Button Preview Generator</h2>
 
   <input type="text" id="imageUrl" placeholder="Paste image URL here" value="https://i.postimg.cc/j5ytQPsc/cce886dc9bf17f8e20e3d5d8860585a1-2.jpg" />
-  <input type="text" id="redirectUrl" placeholder="Redirect URL (e.g. https://t.me/Xibabes)" value="https://t.me/Xibabes" />
   <button id="generateBtn">Generate Preview</button>
 
-  <canvas id="previewCanvas" style="display:none;"></canvas>
+  <canvas id="previewCanvas"></canvas>
 
   <div id="output"></div>
 
@@ -75,7 +62,6 @@
 
     generateBtn.addEventListener("click", () => {
       const imageUrl = document.getElementById("imageUrl").value.trim();
-      const redirectUrl = document.getElementById("redirectUrl").value.trim();
 
       if (!imageUrl) return alert("Please enter an image URL.");
 
@@ -84,7 +70,7 @@
       img.src = imageUrl;
 
       img.onload = () => {
-        // Draw image on canvas
+        // Draw image
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
@@ -108,37 +94,7 @@
         ctx.fillStyle = "white";
         ctx.fill();
 
-        canvas.style.display = "block";
-
         const dataURL = canvas.toDataURL("image/jpeg", 0.95);
-
-        // Generate HTML preview with OG tags
-        const rawHTML = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Exclusive Invite 💋</title>
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com/preview.html">
-  <meta property="og:title" content="Exclusive Invite 💋">
-  <meta property="og:description" content="Join the private circle now. 18+ only.">
-  <meta property="og:image" content="${dataURL}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <p>Redirecting...</p>
-  <script>
-    setTimeout(() => {
-      window.location.href = "${redirectUrl}";
-    }, 2000);
-  </script>
-</body>
-</html>`;
-
-        const escapedHTML = rawHTML
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;');
 
         output.innerHTML = `
           <h3>Preview Image with Play Button:</h3>
@@ -146,13 +102,11 @@
           <a href="${dataURL}" download="preview.jpg">
             <button class="download-btn">⬇️ Download Image</button>
           </a>
-          <h3>HTML Preview Snippet:</h3>
-          <div class="html-snippet">${escapedHTML}</div>
         `;
       };
 
       img.onerror = () => {
-        alert("❌ Failed to load image. Try another CORS-enabled image URL.");
+        alert("❌ Failed to load image. Try another image URL that supports CORS.");
       };
     });
   </script>
