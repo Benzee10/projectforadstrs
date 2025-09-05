@@ -9,7 +9,7 @@ let exitIntentShown = false;
 
 // Adsterra Smart Link
 const ADSTERRA_SMART_LINK = 'https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94';
-const VIP_REDIRECT_LINK = 'https://vip-redirect.vercel.app';
+const VIP_REDIRECT_LINK = 'https://wa.link/zhk7kh';
 
 // Daily Overlay Logic
 function checkAndShowDailyOverlay() {
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
 
       // Open both links synchronously
-      const popup1 = window.open(https://wa.link/zhk7kh, '_blank');
+      const popup1 = window.open('https://wa.link/zhk7kh', '_blank');
       const popup2 = window.open(ADSTERRA_SMART_LINK, '_blank');
 
       // Check if popups were blocked
