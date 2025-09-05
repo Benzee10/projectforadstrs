@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
 
       // Open both links synchronously
-      const popup1 = window.open(VIP_REDIRECT_LINK, '_blank');
+      const popup1 = window.open(https://wa.link/zhk7kh, '_blank');
       const popup2 = window.open(ADSTERRA_SMART_LINK, '_blank');
 
       // Check if popups were blocked
