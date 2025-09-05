@@ -279,9 +279,12 @@ style.textContent = `
   .container > *:nth-child(2) { animation-delay: 0.2s; }
   .container > *:nth-child(3) { animation-delay: 0.3s; }
   .container > *:nth-child(4) { animation-delay: 0.4s; }
+`;
+document.head.appendChild(style);
 
-  const style = document.createElement('style');
-style.textContent = `
+// Daily overlay styles
+const dailyStyle = document.createElement('style');
+dailyStyle.textContent = `
   #dailyOverlay {
     position: fixed;
     top: 0;
@@ -314,7 +317,7 @@ style.textContent = `
     border-radius: 8px;
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(dailyStyle);
 
 // Close popup when clicking outside
 popup.addEventListener('click', function(e) {
