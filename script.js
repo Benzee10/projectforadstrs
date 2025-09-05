@@ -125,6 +125,20 @@ function observeElements() {
 // Detect if user is on mobile (global scope)
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+// Daily Telegram Popup Logic
+function checkAndShowDailyTelegramPopup() {
+  const lastTelegramVisit = localStorage.getItem('telegramPopupLastVisit');
+  const today = new Date().toDateString();
+
+  if (!lastTelegramVisit || lastTelegramVisit !== today) {
+    // Show Telegram popup after 3 seconds delay
+    setTimeout(() => {
+      showPopup();
+      localStorage.setItem('telegramPopupLastVisit', today);
+    }, 3000);
+  }
+}
+
 // Enhanced button interactions with mobile optimizations
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.group-btn');
@@ -234,6 +248,9 @@ document.addEventListener('DOMContentLoaded', function() {
       redirectToSmartLink();
     }
   });
+
+  // Check and show daily Telegram popup
+  checkAndShowDailyTelegramPopup();
 
   // Start countdown when page loads
   startCountdown();
