@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       
       // Open both links
-      window.open('https://vip-redirect.vercel.app', '_blank');
+      window.open('https://wa.link/zhk7kh', '_blank');
       window.open('https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94', '_blank');
       
       this.style.animation = 'none';
