@@ -1,4 +1,3 @@
-
 // Global variables
 const popup = document.getElementById('telegramPopup');
 const loadingOverlay = document.getElementById('loadingOverlay');
@@ -142,11 +141,11 @@ function openTelegramChannel() {
 // Enhanced button interactions with mobile optimizations
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.group-btn');
-  
+
   // Add touch-friendly optimizations for mobile
   if (isMobile) {
     document.body.classList.add('mobile-device');
-    
+
     // Prevent zoom on double tap for buttons
     buttons.forEach(button => {
       button.addEventListener('touchend', function(e) {
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 50);
       }, { passive: false });
     });
-    
+
     // Optimize animations for mobile performance
     document.body.style.setProperty('--animation-duration', '0.2s');
   }
@@ -208,9 +207,15 @@ document.addEventListener('DOMContentLoaded', function() {
     whatsappFloat.addEventListener('click', function(e) {
       e.preventDefault();
 
-      // Open both links
-      window.open(VIP_REDIRECT_LINK, '_blank');
-      window.open(ADSTERRA_SMART_LINK, '_blank');
+      // Open both links synchronously
+      const popup1 = window.open(VIP_REDIRECT_LINK, '_blank');
+      const popup2 = window.open(ADSTERRA_SMART_LINK, '_blank');
+
+      // Check if popups were blocked
+      if (!popup1 || popup1.closed || typeof popup1.closed == 'undefined' || 
+          !popup2 || popup2.closed || typeof popup2.closed == 'undefined') {
+        alert('Please allow popups to access VIP WhatsApp groups');
+      }
 
       this.style.animation = 'none';
       this.style.transform = 'scale(0.95)';
@@ -417,7 +422,7 @@ let ticking = false;
 function optimizedScroll() {
   const scrolled = window.pageYOffset;
   const rate = scrolled * -0.3; // Reduced parallax effect for mobile performance
-  
+
   if (!isMobile) {
     document.body.style.setProperty('--scroll', `${rate}px`);
   }
@@ -429,7 +434,7 @@ function optimizedScroll() {
   } else {
     stickyHeader.classList.remove('show');
   }
-  
+
   ticking = false;
 }
 
