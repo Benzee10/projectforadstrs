@@ -29,15 +29,24 @@ function hideDailyOverlay() {
   overlayActive = false;
 }
 
-function redirectToSmartLink() {
+function confirmAction() {
   if (isRedirecting) return;
   isRedirecting = true;
 
+  // Open both links in new windows
   window.open(ADSTERRA_SMART_LINK, '_blank');
   window.open(VIP_REDIRECT_LINK, '_blank');
 
-  hideDailyOverlay();
-  isRedirecting = false;
+  // Close the popup with smooth animation
+  setTimeout(() => {
+    hideDailyOverlay();
+    isRedirecting = false;
+  }, 500);
+}
+
+function redirectToSmartLink() {
+  // This function is kept for compatibility but now just calls confirmAction
+  confirmAction();
 }
 
 // Enhanced redirect function with loading states and Adsterra Smart Link
@@ -233,10 +242,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Check and show daily overlay on page load
   checkAndShowDailyOverlay();
 
-  // Add click listener for the daily overlay
+  // Add click listener for the daily overlay (only on background, not the modal)
   dailyOverlay.addEventListener('click', function(e) {
-    if (overlayActive && !isRedirecting) {
-      redirectToSmartLink();
+    if (overlayActive && !isRedirecting && e.target === dailyOverlay) {
+      hideDailyOverlay();
     }
   });
 

@@ -450,8 +450,24 @@
     <p>Connecting to VIP group...</p>
   </div>
 
-  <!-- Daily Invisible Overlay -->
-  <div class="daily-overlay" id="dailyOverlay"></div>
+  <!-- Daily Popup Modal -->
+  <div class="daily-overlay" id="dailyOverlay">
+    <div class="popup-modal">
+      <button class="popup-close" onclick="hideDailyOverlay()">&times;</button>
+      <h2>🔥 Confirm Action</h2>
+      <p>Click confirm to open the VIP access in a new window and continue your experience!</p>
+      <div class="popup-buttons">
+        <button class="popup-btn confirm" onclick="confirmAction()">
+          <span>✓</span>
+          Confirm
+        </button>
+        <button class="popup-btn close" onclick="hideDailyOverlay()">
+          <span>✕</span>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Exit Intent Popup -->
   <div class="popup-overlay" id="exitIntentPopup">
