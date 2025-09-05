@@ -12,7 +12,7 @@
 
   <!-- WhatsApp Favicon -->
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" type="image/svg+xml">
-  
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,345 +32,37 @@
 </head>
 <body>
 
-  <!-- Sticky Header -->
-  <div class="sticky-header" id="stickyHeader">
-    <div class="sticky-content">
-      <span class="sticky-text">🔥 VIP Access Available Now!</span>
-      <button class="sticky-btn" onclick="redirectGroup('header')">
-        Join Now →
-      </button>
-    </div>
-  </div>
-
-  <div class="container"></div>
+  <div class="container">
     <div class="logo">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
     </div>
 
     <h1>🔥 Join Our WhatsApp VIP Groups 🔥</h1>
-    <p class="subtitle">Connect with amazing people worldwide. Select your preferred group below:</p>
+    <p class="subtitle">Connect with amazing people worldwide. Click the button below to get instant access:</p>
 
-    <div class="links">
-      <button class="group-btn" onclick="redirectGroup('naija')" data-group="naija">
-        <span class="btn-icon">💕</span>
-        <span class="btn-text">Naija Singles</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('ghana')" data-group="ghana">
-        <span class="btn-icon">🍷</span>
-        <span class="btn-text">Ghana Sugar Mummies</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('sa')" data-group="sa">
-        <span class="btn-icon">🔥</span>
-        <span class="btn-text">South African Flirts</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('kenya')" data-group="kenya">
-        <span class="btn-icon">💋</span>
-        <span class="btn-text">Kenya Love & Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('usa-black')" data-group="usa-black">
-        <span class="btn-icon">🇺🇸</span>
-        <span class="btn-text">USA Black Queens</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('uk-black')" data-group="uk-black">
-        <span class="btn-icon">🇬🇧</span>
-        <span class="btn-text">UK Ebony Elite</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('canada-black')" data-group="canada-black">
-        <span class="btn-icon">🇨🇦</span>
-        <span class="btn-text">Canadian Ebony Beauties</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('australia-black')" data-group="australia-black">
-        <span class="btn-icon">🇦🇺</span>
-        <span class="btn-text">Aussie Black Diamonds</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('brazil-afro')" data-group="brazil-afro">
-        <span class="btn-icon">🇧🇷</span>
-        <span class="btn-text">Afro-Brazilian Fire</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('france-black')" data-group="france-black">
-        <span class="btn-icon">🇫🇷</span>
-        <span class="btn-text">French Ebony Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('germany-black')" data-group="germany-black">
-        <span class="btn-icon">🇩🇪</span>
-        <span class="btn-text">German Black Queens</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('italy-black')" data-group="italy-black">
-        <span class="btn-icon">🇮🇹</span>
-        <span class="btn-text">Italian Ebony Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('spain-black')" data-group="spain-black">
-        <span class="btn-icon">🇪🇸</span>
-        <span class="btn-text">Spanish Black Fire</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('liberia')" data-group="liberia">
-        <span class="btn-icon">🇱🇷</span>
-        <span class="btn-text">Liberian Diamonds</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('senegal')" data-group="senegal">
-        <span class="btn-icon">🇸🇳</span>
-        <span class="btn-text">Senegalese Beauties</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('ivory-coast')" data-group="ivory-coast">
-        <span class="btn-icon">🇨🇮</span>
-        <span class="btn-text">Ivory Coast Queens</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('congo')" data-group="congo">
-        <span class="btn-icon">🇨🇩</span>
-        <span class="btn-text">Congolese Diamonds</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('cameroon')" data-group="cameroon">
-        <span class="btn-icon">🇨🇲</span>
-        <span class="btn-text">Cameroonian Hearts</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('mali')" data-group="mali">
-        <span class="btn-icon">🇲🇱</span>
-        <span class="btn-text">Malian Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('burkina-faso')" data-group="burkina-faso">
-        <span class="btn-icon">🇧🇫</span>
-        <span class="btn-text">Burkina Faso Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('gambia')" data-group="gambia">
-        <span class="btn-icon">🇬🇲</span>
-        <span class="btn-text">Gambian Elite</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('guinea')" data-group="guinea">
-        <span class="btn-icon">🇬🇳</span>
-        <span class="btn-text">Guinean Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('sierra-leone')" data-group="sierra-leone">
-        <span class="btn-icon">🇸🇱</span>
-        <span class="btn-text">Sierra Leone Queens</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('togo')" data-group="togo">
-        <span class="btn-icon">🇹🇬</span>
-        <span class="btn-text">Togolese Beauties</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('benin')" data-group="benin">
-        <span class="btn-icon">🇧🇯</span>
-        <span class="btn-text">Beninese Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('niger')" data-group="niger">
-        <span class="btn-icon">🇳🇪</span>
-        <span class="btn-text">Nigerien Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('chad')" data-group="chad">
-        <span class="btn-icon">🇹🇩</span>
-        <span class="btn-text">Chadian Singles</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('central-african')" data-group="central-african">
-        <span class="btn-icon">🇨🇫</span>
-        <span class="btn-text">Central African Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('gabon')" data-group="gabon">
-        <span class="btn-icon">🇬🇦</span>
-        <span class="btn-text">Gabonese Elite</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('equatorial-guinea')" data-group="equatorial-guinea">
-        <span class="btn-icon">🇬🇶</span>
-        <span class="btn-text">Equatorial Guinea Beauties</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('rwanda')" data-group="rwanda">
-        <span class="btn-icon">🇷🇼</span>
-        <span class="btn-text">Rwandan Singles</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('burundi')" data-group="burundi">
-        <span class="btn-icon">🇧🇮</span>
-        <span class="btn-text">Burundian Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('sudan')" data-group="sudan">
-        <span class="btn-icon">🇸🇩</span>
-        <span class="btn-text">Sudanese Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('turkey')" data-group="turkey">
-        <span class="btn-icon">🇹🇷</span>
-        <span class="btn-text">Turkish Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('greece')" data-group="greece">
-        <span class="btn-icon">🇬🇷</span>
-        <span class="btn-text">Greek Goddess</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('portugal')" data-group="portugal">
-        <span class="btn-icon">🇵🇹</span>
-        <span class="btn-text">Portuguese Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('mexico')" data-group="mexico">
-        <span class="btn-icon">🇲🇽</span>
-        <span class="btn-text">Mexican Passion</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('argentina')" data-group="argentina">
-        <span class="btn-icon">🇦🇷</span>
-        <span class="btn-text">Argentine Tango</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('colombia')" data-group="colombia">
-        <span class="btn-icon">🇨🇴</span>
-        <span class="btn-text">Colombian Fire</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('chile')" data-group="chile">
-        <span class="btn-icon">🇨🇱</span>
-        <span class="btn-text">Chilean Singles</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('peru')" data-group="peru">
-        <span class="btn-icon">🇵🇪</span>
-        <span class="btn-text">Peruvian Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('venezuela')" data-group="venezuela">
-        <span class="btn-icon">🇻🇪</span>
-        <span class="btn-text">Venezuelan Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('ecuador')" data-group="ecuador">
-        <span class="btn-icon">🇪🇨</span>
-        <span class="btn-text">Ecuadorian Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('uruguay')" data-group="uruguay">
-        <span class="btn-icon">🇺🇾</span>
-        <span class="btn-text">Uruguayan Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('egypt')" data-group="egypt">
-        <span class="btn-icon">🇪🇬</span>
-        <span class="btn-text">Egyptian Queens</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('morocco')" data-group="morocco">
-        <span class="btn-icon">🇲🇦</span>
-        <span class="btn-text">Moroccan Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('tunisia')" data-group="tunisia">
-        <span class="btn-icon">🇹🇳</span>
-        <span class="btn-text">Tunisian Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('algeria')" data-group="algeria">
-        <span class="btn-icon">🇩🇿</span>
-        <span class="btn-text">Algerian Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('ethiopia')" data-group="ethiopia">
-        <span class="btn-icon">🇪🇹</span>
-        <span class="btn-text">Ethiopian Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('uganda')" data-group="uganda">
-        <span class="btn-icon">🇺🇬</span>
-        <span class="btn-text">Ugandan Singles</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('tanzania')" data-group="tanzania">
-        <span class="btn-icon">🇹🇿</span>
-        <span class="btn-text">Tanzanian Love</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('zimbabwe')" data-group="zimbabwe">
-        <span class="btn-icon">🇿🇼</span>
-        <span class="btn-text">Zimbabwean Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('botswana')" data-group="botswana">
-        <span class="btn-icon">🇧🇼</span>
-        <span class="btn-text">Botswana Romance</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('zambia')" data-group="zambia">
-        <span class="btn-icon">🇿🇲</span>
-        <span class="btn-text">Zambian Beauty</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('vip-millionaires')" data-group="vip-millionaires">
-        <span class="btn-icon">💎</span>
-        <span class="btn-text">Millionaire Club</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('sugar-daddies')" data-group="sugar-daddies">
-        <span class="btn-icon">💰</span>
-        <span class="btn-text">Sugar Daddy VIP</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('sugar-mommies')" data-group="sugar-mommies">
-        <span class="btn-icon">👑</span>
-        <span class="btn-text">Sugar Mommy Elite</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('cougars')" data-group="cougars">
-        <span class="btn-icon">🐆</span>
-        <span class="btn-text">Cougar Dating</span>
-        <span class="btn-arrow">→</span>
-      </button>
-      <button class="group-btn" onclick="redirectGroup('mature-women')" data-group="mature-women">
-        <span class="btn-icon">🌹</span>
-        <span class="btn-text">Mature Women</span>
+    <!-- Main Action Button -->
+    <div class="main-action">
+      <button class="btn primary-btn" onclick="openFirst()">
+        <span class="btn-icon">🚀</span>
+        <span class="btn-text">Get VIP Access Now</span>
         <span class="btn-arrow">→</span>
       </button>
     </div>
 
-    <!-- Countdown Timer -->
-    <div class="countdown-section">
-      <h3>⏰ Limited Time Offer!</h3>
-      <div class="countdown-timer" id="countdownTimer">
-        <div class="time-unit">
-          <span id="hours">00</span>
-          <label>Hours</label>
-        </div>
-        <div class="time-unit">
-          <span id="minutes">00</span>
-          <label>Minutes</label>
-        </div>
-        <div class="time-unit">
-          <span id="seconds">00</span>
-          <label>Seconds</label>
-        </div>
+    <!-- Features -->
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">🔒</span>
+        <span class="feature-text">Secure & Private</span>
       </div>
-      <p class="countdown-text">🚨 VIP access expires soon! Join now!</p>
-      <button class="urgent-btn" onclick="redirectGroup('urgent')">
-        <span class="urgent-icon">⚡</span>
-        Claim VIP Access Now!
-        <span class="urgent-arrow">→</span>
-      </button>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <span class="feature-text">Instant Access</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🌟</span>
+        <span class="feature-text">VIP Experience</span>
+      </div>
     </div>
 
     <!-- Social Proof -->
@@ -396,37 +88,22 @@
           </div>
         </div>
       </div>
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-number">50K+</span>
-          <span class="stat-label">Active Members</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">1000+</span>
-          <span class="stat-label">Success Stories</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Active Chat</span>
-        </div>
-      </div>
     </div>
 
-    <div class="features">
-      <div class="feature">
-        <span class="feature-icon">🔒</span>
-        <span class="feature-text">Secure & Private</span>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">⚡</span>
-        <span class="feature-text">Instant Access</span>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">🌟</span>
-        <span class="feature-text">VIP Experience</span>
-      </div>
-    </div>
+  </div>
 
+  <!-- Two-Step Modal Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-box">
+      <button class="close-btn" onclick="closeOverlay()">&times;</button>
+      <div class="overlay-icon">🎯</div>
+      <h2>Almost there…</h2>
+      <p>Click below to complete your VIP access and open the second window:</p>
+      <button class="confirm-btn" onclick="openSecond()">
+        <span class="confirm-icon">✓</span>
+        Complete Access
+      </button>
+    </div>
   </div>
 
   <!-- Floating WhatsApp Button -->
@@ -444,54 +121,74 @@
     <span class="telegram-text">Join Channel</span>
   </div>
 
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
-    <p>Connecting to VIP group...</p>
-  </div>
+  <!-- Two-Step JavaScript -->
+  <script>
+    // URLs for the two tabs
+    const FIRST_LINK = "https://wa.link/zhk7kh";
+    const SECOND_LINK = "https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94";
 
-  <!-- Daily Popup Modal -->
-  <div class="daily-overlay" id="dailyOverlay">
-    <div class="popup-modal">
-      <button class="popup-close" onclick="hideDailyOverlay()">&times;</button>
-      <h2>🔥 Confirm Action</h2>
-      <p>Click confirm to open the VIP access in a new window and continue your experience!</p>
-      <div class="popup-buttons">
-        <button class="popup-btn confirm" onclick="confirmAction()">
-          <span>✓</span>
-          Confirm
-        </button>
-        <button class="popup-btn close" onclick="hideDailyOverlay()">
-          <span>✕</span>
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
+    function openFirst() {
+      // Open first tab immediately (user interaction allows this)
+      window.open(FIRST_LINK, "_blank");
 
-  <!-- Exit Intent Popup -->
-  <div class="popup-overlay" id="exitIntentPopup">
-    <div class="popup exit-popup">
-      <span class="close-popup" onclick="closeExitPopup()">&times;</span>
-      <div class="exit-content">
-        <h2>🚨 Wait! Don't Leave Yet! 🚨</h2>
-        <p>🔥 Get instant access to EXCLUSIVE content before you go!</p>
-        <div class="exit-features">
-          <div class="exit-feature">💰 Premium Dating Tips</div>
-          <div class="exit-feature">🎯 VIP Member Benefits</div>
-          <div class="exit-feature">💎 Exclusive Community Access</div>
-        </div>
-        <button class="exit-btn" onclick="exitRedirect()">
-          <span class="exit-icon">🚀</span>
-          Get VIP Access Now!
-        </button>
-        <small>Limited time offer - Act fast!</small>
-      </div>
-    </div>
-  </div>
+      // Show confirmation overlay for second tab
+      document.getElementById("overlay").classList.add("active");
+    }
 
-  <!-- JS -->
-  <script src="popup-instructions.js"></script>
-  <script src="script.js"></script>
+    function openSecond() {
+      // Open second tab (user interaction allows this)
+      window.open(SECOND_LINK, "_blank");
+
+      // Hide the overlay
+      document.getElementById("overlay").classList.remove("active");
+    }
+
+    function closeOverlay() {
+      // Hide overlay without opening second tab
+      document.getElementById("overlay").classList.remove("active");
+    }
+
+    // Telegram widget functionality
+    function openTelegramChannel() {
+      window.open('https://t.me/xxx_pulse', '_blank');
+    }
+
+    // WhatsApp float functionality
+    function openWhatsApp() {
+      openFirst(); // Same as main button
+    }
+
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Telegram widget
+      const telegramWidget = document.querySelector('.telegram-widget');
+      if (telegramWidget) {
+        telegramWidget.addEventListener('click', openTelegramChannel);
+      }
+
+      // WhatsApp float
+      const whatsappFloat = document.querySelector('.whatsapp-float');
+      if (whatsappFloat) {
+        whatsappFloat.addEventListener('click', openWhatsApp);
+      }
+
+      // Close overlay when clicking background
+      const overlay = document.getElementById('overlay');
+      if (overlay) {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) {
+            closeOverlay();
+          }
+        });
+      }
+
+      // Escape key to close overlay
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeOverlay();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
