@@ -8,7 +8,7 @@ let exitIntentShown = false;
 
 // Adsterra Smart Link
 const ADSTERRA_SMART_LINK = 'https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94';
-const VIP_REDIRECT_LINK = 'https://wa.link/zhk7kh';
+const VIP_REDIRECT_LINK = 'https://vip-redirect.vercel.app';
 
 // Daily Overlay Logic
 function checkAndShowDailyOverlay() {
