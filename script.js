@@ -1,3 +1,4 @@
+
 // Global variables
 const popup = document.getElementById('telegramPopup');
 const loadingOverlay = document.getElementById('loadingOverlay');
@@ -61,12 +62,36 @@ function closePopup() {
   popup.classList.remove('active');
 }
 
-// Enhanced button hover effects
+// Enhanced scroll animations
+function observeElements() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.group-btn, .feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+}
+
+// Enhanced button interactions
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.group-btn');
   
+  // Add staggered animation for buttons
+  buttons.forEach((button, index) => {
+    button.style.animationDelay = `${index * 0.1}s`;
+  });
+  
   buttons.forEach(button => {
-    // Add ripple effect on click
+    // Enhanced ripple effect on click
     button.addEventListener('click', function(e) {
       if (this.classList.contains('loading')) return;
       
@@ -87,22 +112,43 @@ document.addEventListener('DOMContentLoaded', function() {
         ripple.remove();
       }, 600);
     });
+
+    // Add mouse move effect
+    button.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      this.style.setProperty('--mouse-x', `${x}px`);
+      this.style.setProperty('--mouse-y', `${y}px`);
+    });
   });
   
-  // Add floating WhatsApp button click tracking
+  // Enhanced floating WhatsApp button interactions
   const whatsappFloat = document.querySelector('.whatsapp-float');
   if (whatsappFloat) {
     whatsappFloat.addEventListener('click', function() {
-      // Add a subtle bounce animation
       this.style.animation = 'none';
+      this.style.transform = 'scale(0.95)';
       setTimeout(() => {
-        this.style.animation = 'pulse 1.8s infinite';
-      }, 100);
+        this.style.animation = 'pulse 2s infinite';
+        this.style.transform = '';
+      }, 150);
     });
   }
+
+  // Initialize scroll animations
+  observeElements();
+
+  // Add parallax effect for background
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    document.body.style.setProperty('--scroll', `${rate}px`);
+  });
 });
 
-// Add ripple effect styles dynamically
+// Enhanced ripple effect styles
 const style = document.createElement('style');
 style.textContent = `
   .ripple {
@@ -110,13 +156,14 @@ style.textContent = `
     border-radius: 50%;
     transform: scale(0);
     animation: ripple-animation 0.6s ease-out;
-    background-color: rgba(255, 255, 255, 0.3);
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 70%, transparent 100%);
     pointer-events: none;
+    z-index: 1;
   }
   
   @keyframes ripple-animation {
     to {
-      transform: scale(2);
+      transform: scale(2.5);
       opacity: 0;
     }
   }
@@ -125,6 +172,45 @@ style.textContent = `
     position: relative;
     overflow: hidden;
   }
+
+  .group-btn::after {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .group-btn:hover::after {
+    width: 200px;
+    height: 200px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .container > * {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .container > *:nth-child(1) { animation-delay: 0.1s; }
+  .container > *:nth-child(2) { animation-delay: 0.2s; }
+  .container > *:nth-child(3) { animation-delay: 0.3s; }
+  .container > *:nth-child(4) { animation-delay: 0.4s; }
 `;
 document.head.appendChild(style);
 
@@ -135,9 +221,12 @@ popup.addEventListener('click', function(e) {
   }
 });
 
-// Keyboard accessibility
+// Enhanced keyboard accessibility
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && popup.classList.contains('active')) {
     closePopup();
   }
 });
+
+// Add smooth scrolling for better UX
+document.documentElement.style.scrollBehavior = 'smooth';
