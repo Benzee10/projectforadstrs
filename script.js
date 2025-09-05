@@ -1,5 +1,4 @@
 // Global variables
-const popup = document.getElementById('telegramPopup');
 const loadingOverlay = document.getElementById('loadingOverlay');
 const dailyOverlay = document.getElementById('dailyOverlay');
 const exitPopup = document.getElementById('exitIntentPopup');
@@ -43,10 +42,7 @@ function confirmAction() {
   }, 500);
 }
 
-function redirectToSmartLink() {
-  // This function is kept for compatibility but now just calls confirmAction
-  confirmAction();
-}
+
 
 // Enhanced redirect function with loading states and Adsterra Smart Link
 function redirectGroup(groupType) {
@@ -79,10 +75,7 @@ function redirectGroup(groupType) {
       }
       isRedirecting = false;
 
-      // Show Telegram popup after successful redirect
-      setTimeout(() => {
-        showPopup();
-      }, 1000);
+      
     }, 1500);
   }, 800);
 }
@@ -96,20 +89,7 @@ function hideLoading() {
   loadingOverlay.classList.remove('active');
 }
 
-// Popup functions
-function showPopup() {
-  popup.classList.add('active');
-  // Auto-hide popup after 10 seconds
-  setTimeout(() => {
-    if (popup.classList.contains('active')) {
-      closePopup();
-    }
-  }, 10000);
-}
 
-function closePopup() {
-  popup.classList.remove('active');
-}
 
 // Enhanced scroll animations
 function observeElements() {
@@ -330,49 +310,9 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Daily overlay styles
-const dailyStyle = document.createElement('style');
-dailyStyle.textContent = `
-  #dailyOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    display: none;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
 
-  #dailyOverlay.active {
-    display: block;
-    opacity: 1;
-  }
 
-  #dailyOverlay.active > div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 8px;
-  }
-`;
-document.head.appendChild(dailyStyle);
 
-// Close popup when clicking outside
-popup.addEventListener('click', function(e) {
-  if (e.target === popup) {
-    closePopup();
-  }
-});
 
 // Countdown Timer functionality
 function startCountdown() {
@@ -401,35 +341,23 @@ function startCountdown() {
 
 // Enhanced keyboard accessibility
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && popup.classList.contains('active')) {
-    closePopup();
-  }
   if (e.key === 'Escape' && dailyOverlay.classList.contains('active')) {
     hideDailyOverlay();
   }
 });
 
-// Add smooth scrolling for better UX (optimized for mobile)
-if (!isMobile) {
-  document.documentElement.style.scrollBehavior = 'smooth';
-} else {
-  // Use faster scrolling on mobile for better performance
-  document.documentElement.style.scrollBehavior = 'auto';
-}
-
-// Optimize scroll performance for mobile
+// Optimize scroll performance
 let ticking = false;
 function optimizedScroll() {
   const scrolled = window.pageYOffset;
-  const rate = scrolled * -0.3; // Reduced parallax effect for mobile performance
 
   if (!isMobile) {
-    document.body.style.setProperty('--scroll', `${rate}px`);
+    document.body.style.setProperty('--scroll', `${scrolled * -0.3}px`);
   }
 
   // Show sticky header after scrolling down
   const stickyHeader = document.getElementById('stickyHeader');
-  if (scrolled > 200) { // Reduced threshold for mobile
+  if (scrolled > 200) {
     stickyHeader.classList.add('show');
   } else {
     stickyHeader.classList.remove('show');
