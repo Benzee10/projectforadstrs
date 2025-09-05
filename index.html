@@ -87,15 +87,17 @@
 
   <!-- Popup Modal -->
   <div class="popup-overlay" id="telegramPopup">
-    <div class="popup">
+    <div class="popup telegram-popup">
       <span class="close-popup" onclick="closePopup()">&times;</span>
-      <div class="popup-icon">📱</div>
-      <h2>Stay Connected!</h2>
-      <p>Join our Telegram channel for the latest updates, exclusive content, and VIP access notifications.</p>
-      <button class="telegram-btn" onclick="window.open('https://t.me/yourtelegramgroup', '_blank')">
-        <span class="telegram-icon">🚀</span>
-        Join Telegram
-      </button>
+      <div class="telegram-bg-image"></div>
+      <div class="telegram-content">
+        <h2>Join Our Telegram!</h2>
+        <p>Get exclusive updates, VIP access, and connect with our community.</p>
+        <button class="telegram-btn" onclick="window.open('https://t.me/yourtelegramgroup', '_blank'); closePopup();">
+          <span class="telegram-icon">📱</span>
+          Join Channel
+        </button>
+      </div>
     </div>
   </div>
 
