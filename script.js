@@ -122,12 +122,12 @@ function observeElements() {
   });
 }
 
+// Detect if user is on mobile (global scope)
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 // Enhanced button interactions with mobile optimizations
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.group-btn');
-
-  // Detect if user is on mobile
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   // Add touch-friendly optimizations for mobile
   if (isMobile) {
