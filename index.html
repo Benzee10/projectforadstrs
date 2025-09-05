@@ -7,6 +7,11 @@
 
   <!-- WhatsApp Favicon -->
   <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" type="image/svg+xml">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0H97SH5HQ"></script>
@@ -28,41 +33,51 @@
     </div>
 
     <h1>🔥 Join Our WhatsApp VIP Groups 🔥</h1>
-    <p>Select any group below to connect instantly 👇</p>
+    <p class="subtitle">Connect with amazing people worldwide. Select your preferred group below:</p>
 
     <div class="links">
-      <a onclick="redirectGroup('naija')">Naija Singles 💕</a>
-      <a onclick="redirectGroup('ghana')">Ghana Sugar Mummies 🍷</a>
-      <a onclick="redirectGroup('sa')">South African Flirts 🔥</a>
-      <a onclick="redirectGroup('kenya')">Kenya Love & Dating 💋</a>
-      <a onclick="redirectGroup('usa')">USA Hot Singles 🇺🇸</a>
+      <button class="group-btn" onclick="redirectGroup('naija')" data-group="naija">
+        <span class="btn-icon">💕</span>
+        <span class="btn-text">Naija Singles</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="group-btn" onclick="redirectGroup('ghana')" data-group="ghana">
+        <span class="btn-icon">🍷</span>
+        <span class="btn-text">Ghana Sugar Mummies</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="group-btn" onclick="redirectGroup('sa')" data-group="sa">
+        <span class="btn-icon">🔥</span>
+        <span class="btn-text">South African Flirts</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="group-btn" onclick="redirectGroup('kenya')" data-group="kenya">
+        <span class="btn-icon">💋</span>
+        <span class="btn-text">Kenya Love & Dating</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="group-btn" onclick="redirectGroup('usa')" data-group="usa">
+        <span class="btn-icon">🇺🇸</span>
+        <span class="btn-text">USA Hot Singles</span>
+        <span class="btn-arrow">→</span>
+      </button>
     </div>
 
-    <!-- Group Sections -->
-    <div id="naija" class="group-section">
-      <h2>Naija Singles 💕</h2>
-      <p>Connect with fun and flirty singles across Nigeria. Redirecting to VIP...</p>
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">🔒</span>
+        <span class="feature-text">Secure & Private</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <span class="feature-text">Instant Access</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🌟</span>
+        <span class="feature-text">VIP Experience</span>
+      </div>
     </div>
 
-    <div id="ghana" class="group-section">
-      <h2>Ghana Sugar Mummies 🍷</h2>
-      <p>Meet gorgeous sugar mummies in Ghana. Redirecting to VIP...</p>
-    </div>
-
-    <div id="sa" class="group-section">
-      <h2>South African Flirts 🔥</h2>
-      <p>Flirt and mingle with singles across South Africa. Redirecting to VIP...</p>
-    </div>
-
-    <div id="kenya" class="group-section">
-      <h2>Kenya Love & Dating 💋</h2>
-      <p>Find love or fun in Kenya with these exclusive WhatsApp groups. Redirecting to VIP...</p>
-    </div>
-
-    <div id="usa" class="group-section">
-      <h2>USA Hot Singles 🇺🇸</h2>
-      <p>Connect with hot singles in the USA. Redirecting to VIP...</p>
-    </div>
   </div>
 
   <!-- Floating WhatsApp Button -->
@@ -74,10 +89,20 @@
   <div class="popup-overlay" id="telegramPopup">
     <div class="popup">
       <span class="close-popup" onclick="closePopup()">&times;</span>
-      <h2>Join Our Telegram Group!</h2>
-      <p>Stay updated with the latest VIP links and exclusive offers. Click below to join now!</p>
-      <button onclick="window.open('https://t.me/yourtelegramgroup', '_blank')">Join Telegram</button>
+      <div class="popup-icon">📱</div>
+      <h2>Stay Connected!</h2>
+      <p>Join our Telegram channel for the latest updates, exclusive content, and VIP access notifications.</p>
+      <button class="telegram-btn" onclick="window.open('https://t.me/yourtelegramgroup', '_blank')">
+        <span class="telegram-icon">🚀</span>
+        Join Telegram
+      </button>
     </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <p>Connecting to VIP group...</p>
   </div>
 
   <!-- JS -->
