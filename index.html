@@ -1,199 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Bulk Play Button Preview Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      background: #111;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-    textarea, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      box-sizing: border-box;
-      font-family: monospace;
-    }
-    button {
-      background-color: #ff3399;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    canvas {
-      display: none;
-    }
-    #results {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .preview-item {
-      border: 1px solid #444;
-      padding: 12px;
-      border-radius: 12px;
-      background: #222;
-      text-align: center;
-    }
-    .preview-img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .download-btn {
-      background-color: #00cc66;
-      padding: 10px;
-      font-size: 14px;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-    }
-    .error-msg {
-      color: #ff4444;
-      font-weight: bold;
-      margin-top: 10px;
-      font-size: 15px;
-    }
-    #status {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ccc;
-    }
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #eee;
-      border-top: 2px solid transparent;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-left: 10px;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp VIP Groups</title>
+
+  <!-- WhatsApp Favicon -->
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" type="image/svg+xml">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>📺 Bulk Play Button Preview Generator</h2>
-  <p>Paste one image URL per line below:</p>
-  <textarea id="imageUrls" rows="6" placeholder="Paste image URLs here..."></textarea>
-  <button id="generateBtn">Generate Previews</button>
-  <div id="status"></div>
-  <div id="results"></div>
-  <canvas id="hiddenCanvas"></canvas>
+  <div class="container">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
+    </div>
 
-  <script>
-    const generateBtn = document.getElementById("generateBtn");
-    const results = document.getElementById("results");
-    const status = document.getElementById("status");
-    const canvas = document.getElementById("hiddenCanvas");
-    const ctx = canvas.getContext("2d");
+    <h1>🔥 Join Our WhatsApp VIP Groups 🔥</h1>
+    <p>Select any group below to connect instantly 👇</p>
 
-    generateBtn.addEventListener("click", async () => {
-      const urlsRaw = document.getElementById("imageUrls").value.trim();
-      if (!urlsRaw) {
-        alert("Please paste some image URLs!");
-        return;
-      }
+    <div class="links">
+      <a onclick="redirectGroup('naija')">Naija Singles 💕</a>
+      <a onclick="redirectGroup('ghana')">Ghana Sugar Mummies 🍷</a>
+      <a onclick="redirectGroup('sa')">South African Flirts 🔥</a>
+      <a onclick="redirectGroup('kenya')">Kenya Love & Dating 💋</a>
+      <a onclick="redirectGroup('usa')">USA Hot Singles 🇺🇸</a>
+    </div>
 
-      generateBtn.disabled = true;
-      results.innerHTML = "";
-      status.innerHTML = `Generating previews <span class="spinner"></span>`;
+    <!-- Group Sections -->
+    <div id="naija" class="group-section">
+      <h2>Naija Singles 💕</h2>
+      <p>Connect with fun and flirty singles across Nigeria. Redirecting to VIP...</p>
+    </div>
 
-      const urls = urlsRaw.split(/\r?\n/).filter(u => u.trim() !== "");
-      let success = 0, failed = 0;
+    <div id="ghana" class="group-section">
+      <h2>Ghana Sugar Mummies 🍷</h2>
+      <p>Meet gorgeous sugar mummies in Ghana. Redirecting to VIP...</p>
+    </div>
 
-      for (let i = 0; i < urls.length; i++) {
-        const url = urls[i].trim();
-        const ok = await generatePreview(url, i + 1);
-        if (ok) success++; else failed++;
-      }
+    <div id="sa" class="group-section">
+      <h2>South African Flirts 🔥</h2>
+      <p>Flirt and mingle with singles across South Africa. Redirecting to VIP...</p>
+    </div>
 
-      status.innerHTML = `✅ ${success} succeeded, ❌ ${failed} failed`;
-      generateBtn.disabled = false;
-    });
+    <div id="kenya" class="group-section">
+      <h2>Kenya Love & Dating 💋</h2>
+      <p>Find love or fun in Kenya with these exclusive WhatsApp groups. Redirecting to VIP...</p>
+    </div>
 
-    function generatePreview(url, index) {
-      return new Promise(resolve => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = url;
+    <div id="usa" class="group-section">
+      <h2>USA Hot Singles 🇺🇸</h2>
+      <p>Connect with hot singles in the USA. Redirecting to VIP...</p>
+    </div>
+  </div>
 
-        img.onload = () => {
-          if (img.width < 10 || img.height < 10) {
-            showError(url, index);
-            return resolve(false);
-          }
+  <!-- Floating WhatsApp Button -->
+  <a href="https://vip-redirect.vercel.app" target="_blank" class="whatsapp-float" aria-label="Join WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+  </a>
 
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0);
+  <!-- Popup Modal -->
+  <div class="popup-overlay" id="telegramPopup">
+    <div class="popup">
+      <span class="close-popup" onclick="closePopup()">&times;</span>
+      <h2>Join Our Telegram Group!</h2>
+      <p>Stay updated with the latest VIP links and exclusive offers. Click below to join now!</p>
+      <button onclick="window.open('https://t.me/yourtelegramgroup', '_blank')">Join Telegram</button>
+    </div>
+  </div>
 
-          const centerX = img.width / 2;
-          const centerY = img.height / 2;
-          const radius = Math.min(img.width, img.height) / 6;
-
-          ctx.beginPath();
-          ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-          ctx.fillStyle = "rgba(0,0,0,0.5)";
-          ctx.fill();
-
-          ctx.beginPath();
-          const triSize = radius * 0.6;
-          ctx.moveTo(centerX - triSize / 2, centerY - triSize);
-          ctx.lineTo(centerX - triSize / 2, centerY + triSize);
-          ctx.lineTo(centerX + triSize, centerY);
-          ctx.closePath();
-          ctx.fillStyle = "white";
-          ctx.fill();
-
-          const dataURL = canvas.toDataURL("image/jpeg", 0.95);
-
-          const container = document.createElement("div");
-          container.classList.add("preview-item");
-          container.innerHTML = `
-            <img class="preview-img" src="${dataURL}" alt="Preview Image #${index}" />
-            <a href="${dataURL}" download="preview_${index}.jpg">
-              <button class="download-btn">⬇️ Download Image #${index}</button>
-            </a>
-          `;
-
-          results.appendChild(container);
-          resolve(true);
-        };
-
-        img.onerror = () => {
-          showError(url, index);
-          resolve(false);
-        };
-      });
-    }
-
-    function showError(url, index) {
-      const container = document.createElement("div");
-      container.classList.add("preview-item");
-      container.innerHTML = `
-        <p class="error-msg">❌ Failed to load image #${index}<br><small>${url}</small></p>
-      `;
-      results.appendChild(container);
-    }
-  </script>
+  <!-- JS -->
+  <script src="script.js"></script>
 </body>
 </html>
