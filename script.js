@@ -122,13 +122,36 @@ function observeElements() {
   });
 }
 
-// Enhanced button interactions
+// Enhanced button interactions with mobile optimizations
 document.addEventListener('DOMContentLoaded', function() {
   const buttons = document.querySelectorAll('.group-btn');
 
-  // Add staggered animation for buttons
+  // Detect if user is on mobile
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // Add touch-friendly optimizations for mobile
+  if (isMobile) {
+    document.body.classList.add('mobile-device');
+    
+    // Prevent zoom on double tap for buttons
+    buttons.forEach(button => {
+      button.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        // Trigger click after a small delay to ensure proper handling
+        setTimeout(() => {
+          this.click();
+        }, 50);
+      }, { passive: false });
+    });
+    
+    // Optimize animations for mobile performance
+    document.body.style.setProperty('--animation-duration', '0.2s');
+  }
+
+  // Add staggered animation for buttons (reduced for mobile)
   buttons.forEach((button, index) => {
-    button.style.animationDelay = `${index * 0.1}s`;
+    const delay = isMobile ? index * 0.05 : index * 0.1;
+    button.style.animationDelay = `${delay}s`;
   });
 
   buttons.forEach(button => {
@@ -361,8 +384,41 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// Add smooth scrolling for better UX
-document.documentElement.style.scrollBehavior = 'smooth';
+// Add smooth scrolling for better UX (optimized for mobile)
+if (!isMobile) {
+  document.documentElement.style.scrollBehavior = 'smooth';
+} else {
+  // Use faster scrolling on mobile for better performance
+  document.documentElement.style.scrollBehavior = 'auto';
+}
+
+// Optimize scroll performance for mobile
+let ticking = false;
+function optimizedScroll() {
+  const scrolled = window.pageYOffset;
+  const rate = scrolled * -0.3; // Reduced parallax effect for mobile performance
+  
+  if (!isMobile) {
+    document.body.style.setProperty('--scroll', `${rate}px`);
+  }
+
+  // Show sticky header after scrolling down
+  const stickyHeader = document.getElementById('stickyHeader');
+  if (scrolled > 200) { // Reduced threshold for mobile
+    stickyHeader.classList.add('show');
+  } else {
+    stickyHeader.classList.remove('show');
+  }
+  
+  ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(optimizedScroll);
+    ticking = true;
+  }
+}, { passive: true });
 
 // Exit-intent detection
 document.addEventListener('mouseleave', function(e) {
