@@ -4,7 +4,7 @@ const popup = document.getElementById('telegramPopup');
 const loadingOverlay = document.getElementById('loadingOverlay');
 let isRedirecting = false;
 
-// Enhanced redirect function with loading states
+// Enhanced redirect function with loading states and Adsterra Smart Link
 function redirectGroup(group) {
   if (isRedirecting) return; // Prevent multiple clicks
   
@@ -20,8 +20,9 @@ function redirectGroup(group) {
   
   // Add slight delay for better UX
   setTimeout(() => {
-    // Open VIP redirect
+    // Open both the VIP redirect and Adsterra Smart Link
     window.open('https://vip-redirect.vercel.app', '_blank');
+    window.open('https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94', '_blank');
     
     // Hide loading after redirect
     setTimeout(() => {
@@ -127,7 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Enhanced floating WhatsApp button interactions
   const whatsappFloat = document.querySelector('.whatsapp-float');
   if (whatsappFloat) {
-    whatsappFloat.addEventListener('click', function() {
+    whatsappFloat.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Open both links
+      window.open('https://vip-redirect.vercel.app', '_blank');
+      window.open('https://curiositycognition.com/h9xw8i8f?key=1419765068d7b1dbd1e3d5e01e3b7a94', '_blank');
+      
       this.style.animation = 'none';
       this.style.transform = 'scale(0.95)';
       setTimeout(() => {
