@@ -7,7 +7,7 @@ let overlayActive = false;
 let exitIntentShown = false;
 
 // Adsterra Smart Link
-const ADSTERRA_SMART_LINK = 'https://whatsappad.vercel.app/';
+const ADSTERRA_SMART_LINK = 'https://shorteroverflowmartyr.com/wxfft5b7m?key=00ce882da1738c2bac8d7264ecc2382d';
 const VIP_REDIRECT_LINK = 'https://vip-redirect.vercel.app';
 
 // Daily Overlay Logic
